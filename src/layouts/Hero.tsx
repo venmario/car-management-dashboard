@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 
 export default function Hero(): React.JSX.Element {
   return (
-    <section className="hero hero-aliceblue">
+    <section id="hero" className="hero hero-aliceblue">
       <Row className="h-100 w-100 ms-0">
         <Col lg={6}>
           <div className="hero__left pt-lg-5">
