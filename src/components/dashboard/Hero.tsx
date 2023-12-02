@@ -10,7 +10,7 @@ export default function Hero({ path = "/" }: HeroProps): React.JSX.Element {
     <section id="hero" className="hero hero-aliceblue">
       <Row className="h-100 w-100 ms-0">
         <Col lg={6}>
-          <div className="hero__left pt-lg-5">
+          <div className="hero__left pt-lg-5 ms-sm-auto">
             <h1 className="mt-5 heading-24-bold hero-title">
               Sewa & Rental Terbaik di kawasan Surabaya
             </h1>
