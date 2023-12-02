@@ -1,4 +1,4 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import icomplete from "/icons/icon_complete.svg";
 import i24hrs from "/icons/icon_24hrs.svg";
 import iprofessional from "/icons/icon_professional.svg";
@@ -16,70 +16,70 @@ export default function WhyUs(): React.JSX.Element {
         <div className="">
           <Row className="align-items-stretch">
             <Col md={3} className="mb-3 mb-md-0">
-              <div className="card">
+              <Card>
                 <div className="card-icon mb-3">
                   <Image src={icomplete} />
                 </div>
-                <div className="card-title">
+                <Card.Title>
                   <h5 className="title-16-bold">Mobil Lengkap</h5>
-                </div>
+                </Card.Title>
                 <div className="card-content">
                   <p className="body-14-light">
                     Tersedia banyak pilihan mobil, kondisi masih baru, bersih
                     dan terawat
                   </p>
                 </div>
-              </div>
+              </Card>
             </Col>
 
-            <div className="col-md-3 mb-3 mb-md-0">
-              <div className="card">
+            <Col md={3} className="mb-3 mb-md-0">
+              <Card>
                 <div className="card-icon mb-3">
                   <Image src={iprice} />
                 </div>
-                <div className="card-title">
+                <Card.Title>
                   <h5 className="title-16-bold">Harga Murah</h5>
-                </div>
+                </Card.Title>
                 <div className="card-content">
                   <p className="body-14-light">
                     Harga murah dan bersaing, bisa bandingkan harga kami dengan
                     rental mobil lain
                   </p>
                 </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-3 mb-md-0">
-              <div className="card">
+              </Card>
+            </Col>
+            <Col md={3} className="mb-3 mb-md-0">
+              <Card>
                 <div className="card-icon mb-3">
                   <Image src={i24hrs} />
                 </div>
-                <div className="card-title">
+                <Card.Title>
                   <h5 className="title-16-bold">Layanan 24 Jam</h5>
-                </div>
+                </Card.Title>
                 <div className="card-content">
                   <p className="body-14-light">
                     Siap melayani kebutuhan Anda selama 24 jam nonstop. Kami
                     juga tersedia di akhir minggu
                   </p>
                 </div>
-              </div>
-            </div>
-            <div className="col-md-3 mb-3 mb-md-0">
-              <div className="card">
+              </Card>
+            </Col>
+            <Col md={3} className="mb-3 mb-md-0">
+              <Card>
                 <div className="card-icon mb-3">
                   <Image src={iprofessional} />
                 </div>
-                <div className="card-title">
+                <Card.Title>
                   <h5 className="title-16-bold">Sopir Profesional</h5>
-                </div>
+                </Card.Title>
                 <div className="card-content">
                   <p className="body-14-light">
                     Sopir yang profesional, berpengalaman, jujur, ramah dan
                     selalu tepat waktu
                   </p>
                 </div>
-              </div>
-            </div>
+              </Card>
+            </Col>
           </Row>
         </div>
       </Container>

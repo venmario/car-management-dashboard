@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Navbar, Container, Button, Offcanvas, Nav } from "react-bootstrap";
-import Hero from "./Hero";
 import Footer from "./Footer";
-import Main from "../components/landingpage/Main";
+import { Link, Outlet } from "react-router-dom";
 
 export default function Layout(): React.JSX.Element {
   const [show, setShow] = useState<boolean>(false);
@@ -15,11 +14,12 @@ export default function Layout(): React.JSX.Element {
       <header>
         <Navbar expand="lg" sticky="top" className="navbar-aliceblue py-4">
           <Container>
-            <Navbar.Brand href="#">Binar Rental Car</Navbar.Brand>
+            <Link to="/" className="navbar-brand">
+              Binar Rental Car
+            </Link>
             <Button
               className="navbar-toggler"
               type="button"
-              aria-controls="offcanvasNavbar"
               onClick={handleShow}
             >
               <span className="navbar-toggler-icon"></span>
@@ -72,8 +72,7 @@ export default function Layout(): React.JSX.Element {
         </Navbar>
       </header>
       <main>
-        <Hero />
-        <Main />
+        <Outlet />
       </main>
       <Footer />
     </>
