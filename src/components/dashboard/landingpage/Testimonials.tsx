@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import CarouselCard from "./CarouselCard";
 import { Image } from "react-bootstrap";
-import iRate from "/icons/Rate.svg";
+import iRate from "../../../assets/icons/Rate.svg";
 import "swiper/css";
 import "swiper/css/navigation";
 import SwiperNav from "./SwiperNav";

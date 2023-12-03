@@ -8,7 +8,7 @@ import {
   Row,
 } from "react-bootstrap";
 
-import iCheck from "/icons/checklist.svg";
+import iCheck from "../../../assets/icons/checklist.svg";
 
 export default function OurService(): React.JSX.Element {
   return (

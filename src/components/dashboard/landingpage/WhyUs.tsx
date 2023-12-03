@@ -1,8 +1,8 @@
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
-import icomplete from "/icons/icon_complete.svg";
-import i24hrs from "/icons/icon_24hrs.svg";
-import iprofessional from "/icons/icon_professional.svg";
-import iprice from "/icons/icon_price.svg";
+import icomplete from "../../../assets/icons/icon_complete.svg";
+import i24hrs from "../../../assets/icons/icon_24hrs.svg";
+import iprofessional from "../../../assets/icons/icon_professional.svg";
+import iprice from "../../../assets/icons/icon_price.svg";
 
 export default function WhyUs(): React.JSX.Element {
   return (

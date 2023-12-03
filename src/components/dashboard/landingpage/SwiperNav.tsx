@@ -1,6 +1,6 @@
 import { useSwiper } from "swiper/react";
-import iPrev from "/icons/navPrev.svg";
-import iNext from "/icons/navNext.svg";
+import iPrev from "../../../assets/icons/navPrev.svg";
+import iNext from "../../../assets/icons/navNext.svg";
 export default function SwiperNav() {
   const swiper = useSwiper();
   return (

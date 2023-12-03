@@ -321,7 +321,7 @@ body {
     position: relative;
   }
 
-  #form-cari {
+  .form-cari {
     background: white;
     margin-top: -3rem;
     z-index: 99;

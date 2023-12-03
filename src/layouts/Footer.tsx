@@ -1,9 +1,9 @@
 import { Col, Container, ListGroup, Row, Image } from "react-bootstrap";
-import iFacebook from "/icons/icon_facebook.svg";
-import iInstagram from "/icons/icon_instagram.svg";
-import iTwitter from "/icons/icon_twitter.svg";
-import iMail from "/icons/icon_mail.svg";
-import iTwitch from "/icons/icon_twitch.svg";
+import iFacebook from "../assets/icons/icon_facebook.svg";
+import iInstagram from "../assets/icons/icon_instagram.svg";
+import iTwitter from "../assets/icons/icon_twitter.svg";
+import iMail from "../assets/icons/icon_mail.svg";
+import iTwitch from "../assets/icons/icon_twitch.svg";
 export default function Footer(): React.JSX.Element {
   return (
     <footer>
