@@ -100,17 +100,19 @@ export default function FormFilter({ handleSubmit }: FormFilterProps) {
               </div>
             </Col>
             <Col md={6} lg={3}>
-              <FormLabel>Jumlah Penumpang (Optional)</FormLabel>
-              <div className="d-flex">
-                <FormControl
-                  placeholder="Jumlah Penumpang"
-                  type="input"
-                  name="jumlah"
-                  className="body-12-light position-relative"
-                  onChange={(e) => handleCapacity(e.target.value)}
-                  value={capacity}
-                />
-                <img src={iuser} alt="" className="jumlah-icon" />
+              <div className="mb-3 mb-lg-0">
+                <FormLabel>Jumlah Penumpang (Optional)</FormLabel>
+                <div className="d-flex">
+                  <FormControl
+                    placeholder="Jumlah Penumpang"
+                    type="input"
+                    name="jumlah"
+                    className="body-12-light position-relative"
+                    onChange={(e) => handleCapacity(e.target.value)}
+                    value={capacity}
+                  />
+                  <img src={iuser} alt="" className="jumlah-icon" />
+                </div>
               </div>
             </Col>
           </Row>

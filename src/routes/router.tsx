@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout";
 import ErrorPage from "../pages/error-page";
 import LandingPage from "../pages/dashboard/LandingPage";
 import Cars from "../pages/dashboard/Cars";
+import Login from "../pages/Login";
+import AdminLayout from "../layouts/Admin/Layout";
 
 const router = Router([
   {
@@ -19,6 +21,14 @@ const router = Router([
         element: <Cars />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/admin-dashboard",
+    element: <AdminLayout />,
   },
 ]);
 

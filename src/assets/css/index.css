@@ -1,3 +1,23 @@
+/* colors */
+.bg-egypt-blue {
+  background-color: #0d28a6;
+}
+.text-egypt-blue {
+  color: #0d28a6;
+}
+.bg-deep-sapphire {
+  background-color: #091b6f;
+}
+.text-deep-sapphire {
+  color: #091b6f;
+}
+/* components */
+.btn-egypt-blue {
+  background-color: #0d28a6;
+}
+.btn-egypt-blue:hover {
+  background-color: #061e8a;
+}
 /* font */
 body {
   font-family: "Helvetica", "Arial", sans-serif;
@@ -317,4 +337,10 @@ body {
     z-index: 99;
     position: relative;
   }
+}
+
+.image-login {
+  width: 100%;
+  height: 100dvh;
+  object-fit: cover;
 }

@@ -22,3 +22,13 @@ export interface Car {
   updated_by: number;
   deleted_by: number;
 }
+
+export interface IFontSizing {
+  typo?: string;
+  fontSize?: number;
+  weight?: string;
+}
+
+export interface IClassName {
+  className?: string;
+}
