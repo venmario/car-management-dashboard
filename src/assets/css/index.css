@@ -133,10 +133,6 @@ body {
   background-color: #308d33;
 }
 
-.hero {
-  /* height: 80vh; */
-}
-
 .hero-aliceblue {
   background-color: #f1f3ff;
 }
@@ -148,10 +144,6 @@ body {
 
 .hero__left {
   width: 90%;
-}
-
-.hero__right {
-  /* height: 50%; */
 }
 
 .hero__right-img {
@@ -315,8 +307,6 @@ body {
     height: 416px;
   }
 
-  .filter {
-  }
   .position-lg-relative {
     position: relative;
   }

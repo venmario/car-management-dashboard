@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css";
+import "./assets/css/index.css";
 import router from "./routes/router";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
