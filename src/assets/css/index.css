@@ -344,3 +344,48 @@ body {
   height: 100dvh;
   object-fit: cover;
 }
+
+/* admin dashboard */
+.top-nav {
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.side-nav {
+  position: absolute;
+  padding-top: 70px;
+  width: 70px;
+  height: 100dvh;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.side-nav-link {
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 300px;
+}
+.side-nav-link:hover {
+  background-color: #cfd4ed;
+}
+.side-nav-link.active {
+  background-color: #cfd4ed;
+  font-weight: 700px;
+}
+
+.side-bar {
+  width: 220px;
+  margin-left: 70px;
+  height: 100%;
+}
+
+.content {
+}
