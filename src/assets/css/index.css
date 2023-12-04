@@ -18,6 +18,13 @@
 .btn-egypt-blue:hover {
   background-color: #061e8a;
 }
+.btn-outline-egypt-blue {
+  border-color: #0d28a6;
+}
+.btn-outline-egypt-blue:hover {
+  background-color: #061e8a;
+  color: white;
+}
 /* font */
 body {
   font-family: "Helvetica", "Arial", sans-serif;
@@ -346,7 +353,10 @@ body {
 }
 
 /* admin dashboard */
+.admin-header {
+}
 .top-nav {
+  z-index: 10;
   height: 70px;
   position: absolute;
   top: 0;
@@ -361,6 +371,7 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
+  z-index: 9;
 }
 .side-nav-link {
   text-decoration: none;
@@ -381,11 +392,42 @@ body {
   font-weight: 700px;
 }
 
+.sidebar-content-wrapper {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+}
 .side-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 220px;
   margin-left: 70px;
-  height: 100%;
+  margin-top: 70px;
+  z-index: 2;
+}
+
+.menu-heading {
+}
+.sub-menu-heading {
+  background-color: #cfd4ed;
 }
 
 .content {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding-top: 90px;
+  padding-left: 310px;
+  padding-right: 20px;
+  background-color: #e5e5e5;
+}
+
+.breadcrumb {
+  --bs-breadcrumb-divider: ">";
 }

@@ -1,9 +1,9 @@
 import { Navbar } from "react-bootstrap";
 import { Home, Truck } from "react-feather";
-import { Link } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 export default function AdminLayout() {
   return (
-    <header className="position-relative">
+    <header className="position-relative admin-header">
       <Navbar className="top-nav bg-light shadow">
         <div
           className="bg-egypt-blue"
@@ -14,18 +14,28 @@ export default function AdminLayout() {
         </Navbar.Brand>
       </Navbar>
       <div className="side-nav bg-egypt-blue">
-        <Link to="" className="mb-3 side-nav-link p-2">
+        <NavLink
+          end
+          to="/admin-dashboard/"
+          className={({ isActive }) =>
+            isActive ? "side-nav-link active p-2" : "side-nav-link p-2"
+          }
+        >
           <Home />
           <span>Dashboard</span>
-        </Link>
-        <Link to="/admin-dashboard/cars" className="mb-3 side-nav-link p-2">
+        </NavLink>
+        <NavLink
+          to="/admin-dashboard/cars"
+          className={({ isActive }) =>
+            isActive ? "side-nav-link active p-2" : "side-nav-link p-2"
+          }
+        >
           <Truck />
-          <span>Dashboard</span>
-        </Link>
+          <span>Cars</span>
+        </NavLink>
       </div>
-      <div className="d-flex vh-100">
-        <div className="side-bar bg-white"></div>
-        <div className="content bg-light"></div>
+      <div className="sidebar-content-wrapper">
+        <Outlet />
       </div>
     </header>
   );

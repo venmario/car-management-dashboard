@@ -5,6 +5,9 @@ import LandingPage from "../pages/dashboard/LandingPage";
 import Cars from "../pages/dashboard/Cars";
 import Login from "../pages/Login";
 import AdminLayout from "../layouts/Admin/Layout";
+import SidebarDashboard from "../components/admindashboard/SidebarDashboard";
+import SidebarCars from "../components/admindashboard/SidebarCars";
+import CarContent from "../components/admindashboard/CarContent";
 
 const router = Router([
   {
@@ -29,6 +32,22 @@ const router = Router([
   {
     path: "/admin-dashboard",
     element: <AdminLayout />,
+    children: [
+      {
+        path: "/admin-dashboard",
+        element: <SidebarDashboard />,
+      },
+      {
+        path: "/admin-dashboard/cars",
+        element: <SidebarCars />,
+        children: [
+          {
+            path: "/admin-dashboard/cars",
+            element: <CarContent />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

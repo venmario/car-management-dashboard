@@ -13,8 +13,8 @@ export default function Login(): React.JSX.Element {
             className="image-login"
           />
         </Col>
-        <Col sm={6} md={5} lg={4}>
-          <div className="h-100 bg-light d-flex flex-column px-3 justify-content-center">
+        <Col sm={6} md={5} lg={4} className="p-0">
+          <div className="h-100 bg-light d-flex flex-column px-5 justify-content-center">
             <h5 className="heading-24-bold mb-4">Welcome, Admin BCR</h5>
             <Form>
               <FormGroup>
