@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/authContext";
 import { useLocalStorage } from "./useLocalStorage";
 
 // NOTE: optimally move this into a separate file
