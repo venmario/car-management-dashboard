@@ -32,3 +32,8 @@ export interface IFontSizing {
 export interface IClassName {
   className?: string;
 }
+export interface IUser {
+  username: string;
+  token: string;
+  email: string;
+}
