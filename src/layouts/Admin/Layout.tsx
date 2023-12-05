@@ -1,7 +1,20 @@
 import { Navbar } from "react-bootstrap";
 import { Home, Truck } from "react-feather";
-import { Link } from "react-router-dom";
-export default function AdminLayout() {
+import { Link, Navigate } from "react-router-dom";
+
+interface IUser {
+  username: string;
+  token: string;
+  email: string;
+}
+
+interface AdminProps {
+  user?: IUser;
+}
+export default function AdminLayout({ user }: AdminProps) {
+  if (!user?.token) {
+    return <Navigate to="/login" />;
+  }
   return (
     <header className="position-relative">
       <Navbar className="top-nav bg-light shadow">
