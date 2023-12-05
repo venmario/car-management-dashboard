@@ -1,12 +1,7 @@
 import { Navbar } from "react-bootstrap";
 import { Home, Truck } from "react-feather";
 import { Link, Navigate } from "react-router-dom";
-
-interface IUser {
-  username: string;
-  token: string;
-  email: string;
-}
+import { IUser } from "../../interfaces";
 
 interface AdminProps {
   user?: IUser;
