@@ -1,8 +1,39 @@
-import { Button, Col, Form, FormGroup, Image, Row } from "react-bootstrap";
-import TextBox from "../components/Text/TextBox";
+import {
+  Button,
+  Col,
+  Form,
+  FormControl,
+  FormGroup,
+  Image,
+  Row,
+} from "react-bootstrap";
 import TextView from "../components/Text/TextView";
+import { useState } from "react";
+import axios, { AxiosError } from "axios";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(): React.JSX.Element {
+  const navigate = useNavigate();
+  const { isAuthenticated, login } = useAuth();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  async function handleLogin() {
+    const baseUrl = import.meta.env["VITE_BACKEND_URL"];
+    try {
+      const result = await axios.post(`${baseUrl}/login`, { email, password });
+      const token = result.data.token;
+      login(token);
+      if (isAuthenticated) {
+        navigate("/admin-dashboard");
+      }
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        console.log(err.response.data["message"]);
+      }
+    }
+  }
   return (
     <div className="">
       <Row className="m-0" style={{ height: "100dvh" }}>
@@ -21,29 +52,38 @@ export default function Login(): React.JSX.Element {
                 <TextView typo="body" fontSize={14} weight="light">
                   Email
                 </TextView>
-                <TextBox
-                  typo="body"
-                  fontSize={12}
-                  weight="light"
+                <FormControl
                   type="email"
+                  className="body-12-light mb-3 border"
                   placeholder="Email"
-                  className="mb-3 border"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </FormGroup>
               <FormGroup>
                 <TextView typo="body" fontSize={14} weight="light">
                   Password
                 </TextView>
-                <TextBox
+                {/* <TextBox
                   typo="body"
                   fontSize={12}
                   weight="light"
                   type="password"
                   placeholder="6+ karakter"
                   className="mb-3"
+                /> */}
+                <FormControl
+                  type="password"
+                  className="body-12-light mb-3"
+                  placeholder="6+ karakter"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </FormGroup>
-              <Button className="btn-egypt-blue d-block w-100 body-14-bold">
+              <Button
+                onClick={() => handleLogin()}
+                className="btn-egypt-blue d-block w-100 body-14-bold"
+              >
                 Sign In
               </Button>
             </Form>

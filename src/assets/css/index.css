@@ -13,6 +13,7 @@
 }
 /* components */
 .btn-egypt-blue {
+  color: #fff;
   background-color: #0d28a6;
 }
 .btn-egypt-blue:hover {
@@ -20,6 +21,7 @@
 }
 .btn-outline-egypt-blue {
   border-color: #0d28a6;
+  color: #0d28a6;
 }
 .btn-outline-egypt-blue:hover {
   background-color: #061e8a;

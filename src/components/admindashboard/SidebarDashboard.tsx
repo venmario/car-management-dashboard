@@ -8,7 +8,7 @@ export default function SidebarDashboard() {
         <MenuHeading>DASHBOARD</MenuHeading>
         <MenuHeading.SubMenu>Dashboard</MenuHeading.SubMenu>
       </div>
-      <div className="content">
+      <div className="content overflow-scroll">
         <DashboardContent />
       </div>
     </>

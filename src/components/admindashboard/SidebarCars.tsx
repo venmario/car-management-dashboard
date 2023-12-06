@@ -8,7 +8,7 @@ export default function SidebarCars() {
         <MenuHeading>CARS</MenuHeading>
         <MenuHeading.SubMenu>List Cars</MenuHeading.SubMenu>
       </div>
-      <div className="content">
+      <div className="content overflow-scroll">
         <CarContent />
       </div>
     </>

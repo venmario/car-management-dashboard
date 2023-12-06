@@ -5,7 +5,9 @@ interface TextBoxProps extends IFontSizing, IClassName {
   type?: string;
   placeholder?: string;
   variant?: string;
+  value?: string;
   borderColor?: string;
+  onChange?: () => void;
 }
 export default function TextBox({
   type = "input",
@@ -15,6 +17,7 @@ export default function TextBox({
   fontSize = 12,
   weight = "reguler",
   className = "",
+  value = "",
 }: TextBoxProps): React.JSX.Element {
   const style = {
     borderColor: borderColor,
@@ -25,6 +28,7 @@ export default function TextBox({
       type={type}
       placeholder={placeholder}
       style={style}
+      value={value}
       className={`${typo}-${fontSize}-${weight} ${className}`}
     />
   );

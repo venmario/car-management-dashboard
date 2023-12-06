@@ -35,7 +35,7 @@ export default function AdminLayout() {
           <span>Cars</span>
         </NavLink>
       </div>
-      <div className="sidebar-content-wrapper">
+      <div className="sidebar-content-wrapper ">
         <Outlet />
       </div>
     </header>

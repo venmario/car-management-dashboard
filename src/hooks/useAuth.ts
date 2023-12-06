@@ -14,7 +14,8 @@ export const useAuth = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const decode = jwtDecode(token) as IJwtPayload;
-      if (decode.exp && decode.exp * 2000 < Date.now()) {
+
+      if (decode.exp && decode.exp * 1000 < Date.now()) {
         logout();
       } else {
         setIsAuthenticated(true);
@@ -32,18 +33,17 @@ export const useAuth = () => {
   };
 
   const verifyToken = (token: string) => {
-    const baseUrl = import.meta.env.BASE_URL;
+    const baseUrl = import.meta.env["VITE_BACKEND_URL"];
     axios
-      .post(`${baseUrl}/login`, {
+      .get(`${baseUrl}/protected`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         const decode = jwtDecode(token) as IJwtPayload;
-        if (decode.exp && decode.exp * 2000 < Date.now()) {
-          console.error("invalid token");
+        if (decode.exp && decode.exp * 1000 < Date.now()) {
+          logout();
           return;
         }
         localStorage.setItem("token", token);
