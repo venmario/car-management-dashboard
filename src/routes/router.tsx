@@ -8,6 +8,7 @@ import AdminLayout from "../layouts/Admin/Layout";
 import SidebarDashboard from "../components/admindashboard/SidebarDashboard";
 import SidebarCars from "../components/admindashboard/SidebarCars";
 import CarContent from "../components/admindashboard/CarContent";
+import PrivateRoutes from "../utils/privateRoutes";
 
 const router = Router([
   {
@@ -30,20 +31,25 @@ const router = Router([
     element: <Login />,
   },
   {
-    path: "/admin-dashboard",
-    element: <AdminLayout />,
+    element: <PrivateRoutes />,
     children: [
       {
         path: "/admin-dashboard",
-        element: <SidebarDashboard />,
-      },
-      {
-        path: "/admin-dashboard/cars",
-        element: <SidebarCars />,
+        element: <AdminLayout />,
         children: [
           {
+            path: "/admin-dashboard",
+            element: <SidebarDashboard />,
+          },
+          {
             path: "/admin-dashboard/cars",
-            element: <CarContent />,
+            element: <SidebarCars />,
+            children: [
+              {
+                path: "/admin-dashboard/cars",
+                element: <CarContent />,
+              },
+            ],
           },
         ],
       },

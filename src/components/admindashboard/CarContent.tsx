@@ -6,16 +6,16 @@ import { Plus } from "react-feather";
 export default function CarContent() {
   const [filter, setFilter] = useState<string>("all");
   useEffect(() => {
-    try {
-      const res = await axios.get(`${baseUrl}/cars?${qString}`);
-      setCars(res.data);
-      setError(undefined);
-    } catch (err) {
-      if (err instanceof Error) {
-        setCars(undefined);
-        setError(err.message);
-      }
-    }
+    // try {
+    //   const res = await axios.get(`${baseUrl}/cars?${qString}`);
+    //   setCars(res.data);
+    //   setError(undefined);
+    // } catch (err) {
+    //   if (err instanceof Error) {
+    //     setCars(undefined);
+    //     setError(err.message);
+    //   }
+    // }
   }, [filter]);
   return (
     <>

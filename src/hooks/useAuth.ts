@@ -1,25 +1,73 @@
-import { useEffect } from "react";
-import { useUser, User } from "./useUser";
-import { useLocalStorage } from "./useLocalStorage";
+import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import { IUser } from "../interfaces";
 
 export const useAuth = () => {
-  const { user, addUser, removeUser } = useUser();
-  const { getItem } = useLocalStorage();
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<IUser | null>(null);
 
+  interface IJwtPayload extends IUser {
+    exp: number;
+  }
   useEffect(() => {
-    const user = getItem("user");
-    if (user) {
-      addUser(JSON.parse(user));
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decode = jwtDecode(token) as IJwtPayload;
+      if (decode.exp && decode.exp * 2000 < Date.now()) {
+        logout();
+      } else {
+        setIsAuthenticated(true);
+        const authUser: IUser = {
+          username: decode.username,
+          email: decode.email,
+        };
+        setUser(authUser);
+      }
     }
   }, []);
 
-  const login = (user: User) => {
-    addUser(user);
+  const login = (token: string) => {
+    verifyToken(token);
   };
 
+  const verifyToken = (token: string) => {
+    const baseUrl = import.meta.env.BASE_URL;
+    axios
+      .post(`${baseUrl}/login`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        const decode = jwtDecode(token) as IJwtPayload;
+        if (decode.exp && decode.exp * 2000 < Date.now()) {
+          console.error("invalid token");
+          return;
+        }
+        localStorage.setItem("token", token);
+        setIsAuthenticated(true);
+        const authUser: IUser = {
+          username: decode.username,
+          email: decode.email,
+        };
+        setUser(authUser);
+      })
+      .catch((err) => {
+        if (axios.isAxiosError(err)) {
+          console.error(err.status);
+          console.error(err.response);
+        } else {
+          console.error(err);
+        }
+      });
+  };
   const logout = () => {
-    removeUser();
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setUser(null);
   };
 
-  return { user, login, logout };
+  return { isAuthenticated, user, login, logout };
 };
