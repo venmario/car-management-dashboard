@@ -1,4 +1,5 @@
-import CarContent from "./CarContent";
+// import CarContent from "./CarContent";
+import CarForm from "./CarForm";
 import MenuHeading from "./MenuHeading";
 
 export default function SidebarCars() {
@@ -9,7 +10,8 @@ export default function SidebarCars() {
         <MenuHeading.SubMenu>List Cars</MenuHeading.SubMenu>
       </div>
       <div className="content overflow-scroll">
-        <CarContent />
+        {/* <CarContent /> */}
+        <CarForm />
       </div>
     </>
   );

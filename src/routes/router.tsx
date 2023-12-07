@@ -9,6 +9,7 @@ import SidebarDashboard from "../components/admindashboard/SidebarDashboard";
 import SidebarCars from "../components/admindashboard/SidebarCars";
 import CarContent from "../components/admindashboard/CarContent";
 import PrivateRoutes from "../utils/privateRoutes";
+import CarForm from "../components/admindashboard/CarForm";
 
 const router = Router([
   {
@@ -48,6 +49,10 @@ const router = Router([
               {
                 path: "/admin-dashboard/cars",
                 element: <CarContent />,
+              },
+              {
+                path: "/admin-dashboard/cars/create",
+                element: <CarForm />,
               },
             ],
           },

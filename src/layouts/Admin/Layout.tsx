@@ -17,7 +17,7 @@ export default function AdminLayout() {
       <div className="side-nav bg-egypt-blue">
         <NavLink
           end
-          to="/admin-dashboard/"
+          to="/admin-dashboard"
           className={({ isActive }) =>
             isActive ? "side-nav-link active p-2" : "side-nav-link p-2"
           }
@@ -26,6 +26,7 @@ export default function AdminLayout() {
           <span>Dashboard</span>
         </NavLink>
         <NavLink
+          end
           to="/admin-dashboard/cars"
           className={({ isActive }) =>
             isActive ? "side-nav-link active p-2" : "side-nav-link p-2"
