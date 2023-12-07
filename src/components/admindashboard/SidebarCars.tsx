@@ -1,5 +1,5 @@
 // import CarContent from "./CarContent";
-import CarForm from "./CarForm";
+import { Outlet } from "react-router-dom";
 import MenuHeading from "./MenuHeading";
 
 export default function SidebarCars() {
@@ -10,8 +10,7 @@ export default function SidebarCars() {
         <MenuHeading.SubMenu>List Cars</MenuHeading.SubMenu>
       </div>
       <div className="content overflow-scroll">
-        {/* <CarContent /> */}
-        <CarForm />
+        <Outlet />
       </div>
     </>
   );

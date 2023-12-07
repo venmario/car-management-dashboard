@@ -1,11 +1,25 @@
-import { Navbar } from "react-bootstrap";
+import {
+  Col,
+  Dropdown,
+  DropdownButton,
+  FormControl,
+  Navbar,
+  Row,
+} from "react-bootstrap";
 import { Home, Truck } from "react-feather";
 import { NavLink, Outlet } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function AdminLayout() {
+  const { logout, user } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    console.log("logged out");
+  };
   return (
-    <header className="position-relative admin-header">
-      <Navbar className="top-nav bg-light shadow">
+    <header className="position-relative admin-header overflow-hidden">
+      <Navbar className="top-nav bg-light shadow pe-3">
         <div
           className="bg-egypt-blue"
           style={{ height: "70px", width: "70px" }}
@@ -13,6 +27,22 @@ export default function AdminLayout() {
         <Navbar.Brand style={{ width: "220px" }} className="ps-3 m-0">
           Dashboard Admin
         </Navbar.Brand>
+        <Row className="ms-auto">
+          <Col xs="auto">
+            <FormControl
+              type="text"
+              placeholder="Search"
+              className=" mr-sm-2"
+            />
+          </Col>
+          <Col xs="auto">
+            <DropdownButton title={user?.username} align="end">
+              <Dropdown.Item eventKey="1" onClick={() => handleLogout()}>
+                Logout
+              </Dropdown.Item>
+            </DropdownButton>
+          </Col>
+        </Row>
       </Navbar>
       <div className="side-nav bg-egypt-blue">
         <NavLink
@@ -26,7 +56,6 @@ export default function AdminLayout() {
           <span>Dashboard</span>
         </NavLink>
         <NavLink
-          end
           to="/admin-dashboard/cars"
           className={({ isActive }) =>
             isActive ? "side-nav-link active p-2" : "side-nav-link p-2"

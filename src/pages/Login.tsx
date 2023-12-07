@@ -12,11 +12,9 @@ import { useState } from "react";
 import { AxiosError } from "axios";
 import instance from "../api/axios";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 
 export default function Login(): React.JSX.Element {
-  const navigate = useNavigate();
-  const { isAuthenticated, login } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -25,9 +23,6 @@ export default function Login(): React.JSX.Element {
       const result = await instance.post(`/login`, { email, password });
       const token = result.data.token;
       login(token);
-      if (isAuthenticated) {
-        navigate("/admin-dashboard");
-      }
     } catch (err) {
       if (err instanceof AxiosError) {
         console.error(err.response?.data["message"]);
@@ -66,14 +61,6 @@ export default function Login(): React.JSX.Element {
                 <TextView typo="body" fontSize={14} weight="light">
                   Password
                 </TextView>
-                {/* <TextBox
-                  typo="body"
-                  fontSize={12}
-                  weight="light"
-                  type="password"
-                  placeholder="6+ karakter"
-                  className="mb-3"
-                /> */}
                 <FormControl
                   type="password"
                   className="body-12-light mb-3"

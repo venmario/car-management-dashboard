@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Image, Row } from "react-bootstrap";
 import { Plus } from "react-feather";
@@ -7,25 +7,27 @@ import CarCard from "../dashboard/cars/CarCard";
 import icalendar from "../../assets/icons/fi_calendar.svg";
 import iusers from "../../assets/icons/fi_users.svg";
 import iVector from "../../assets/icons/Vector.svg";
+import instance from "../../api/axios";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
-const baseUrl = import.meta.env["VITE_BACKEND_URL"];
 export default function CarContent() {
   const token = localStorage.getItem("token");
   const [filter, setFilter] = useState<string>("all");
   const [cars, setCars] = useState<Car[]>([]);
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
-
+  useAuth();
   useEffect(() => {
     console.log("user effect awal");
 
     const fetchCars = async () => {
-      const result = await axios.get(`${baseUrl}/api/cars`, {
+      const result = await instance.get(`/api/cars`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setCars(result.data);
-      setFilteredCars(cars);
+      setFilteredCars(result.data);
     };
 
     fetchCars().catch((err) => {
@@ -63,10 +65,13 @@ export default function CarContent() {
       </Breadcrumb>
       <div className="d-flex justify-content-between">
         <h3 className="heading-20-bold">List Cars</h3>
-        <Button className="btn-egypt-blue body-14-bold text-white">
+        <Link
+          to="/admin-dashboard/cars/create"
+          className="btn btn-egypt-blue body-14-bold text-white"
+        >
           <Plus />
           Add New Car
-        </Button>
+        </Link>
       </div>
 
       <div className="d-flex gap-2 mb-3">
@@ -109,8 +114,8 @@ export default function CarContent() {
       </div>
 
       <Row>
-        {cars &&
-          cars.map((car) => (
+        {filteredCars &&
+          filteredCars.map((car) => (
             <Col key={car.id} md={6} lg={4} className="mb-3">
               <CarCard>
                 <Image src={car.image} />

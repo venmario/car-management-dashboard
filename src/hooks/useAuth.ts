@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { IUser } from "../interfaces";
+import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [user, setUser] = useState<IUser | null>(null);
-
+  const navigate = useNavigate();
   interface IJwtPayload extends IUser {
     exp: number;
   }
@@ -16,6 +17,8 @@ export const useAuth = () => {
       const decode = jwtDecode(token) as IJwtPayload;
 
       if (decode.exp && decode.exp * 1000 < Date.now()) {
+        console.log("sini");
+
         logout();
       } else {
         setIsAuthenticated(true);
@@ -42,7 +45,11 @@ export const useAuth = () => {
       })
       .then(() => {
         const decode = jwtDecode(token) as IJwtPayload;
-        if (decode.exp && decode.exp * 1000 < Date.now()) {
+        console.log(decode.exp);
+
+        if (decode.exp * 1000 < Date.now()) {
+          console.log("token exp");
+
           logout();
           return;
         }
@@ -53,6 +60,7 @@ export const useAuth = () => {
           email: decode.email,
         };
         setUser(authUser);
+        navigate("/admin-dashboard");
       })
       .catch((err) => {
         if (axios.isAxiosError(err)) {
@@ -67,6 +75,7 @@ export const useAuth = () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
     setUser(null);
+    navigate("/login");
   };
 
   return { isAuthenticated, user, login, logout };

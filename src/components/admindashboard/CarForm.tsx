@@ -23,7 +23,7 @@ export default function CarForm() {
       </Breadcrumb>
 
       <div className="d-flex justify-content-between">
-        <h3 className="heading-20-bold">List Cars</h3>
+        <h3 className="heading-20-bold">Add New Car</h3>
       </div>
 
       <div>
