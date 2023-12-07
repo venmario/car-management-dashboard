@@ -21,9 +21,7 @@ export default function Login(): React.JSX.Element {
   const [password, setPassword] = useState<string>("");
 
   async function handleLogin() {
-    const baseUrl = import.meta.env["VITE_BACKEND_URL"];
     try {
-      // const result = await axios.post(`${baseUrl}/login`, { email, password });
       const result = await instance.post(`/login`, { email, password });
       const token = result.data.token;
       login(token);
@@ -32,7 +30,7 @@ export default function Login(): React.JSX.Element {
       }
     } catch (err) {
       if (err instanceof AxiosError) {
-        console.error(err.response.data["message"]);
+        console.error(err.response?.data["message"]);
       } else if (err instanceof Error) {
         console.error(err.message);
       }
