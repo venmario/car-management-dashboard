@@ -12,6 +12,7 @@ import { useState } from "react";
 import { AxiosError } from "axios";
 import instance from "../api/axios";
 import { useAuth } from "../hooks/useAuth";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login(): React.JSX.Element {
   const { login } = useAuth();
@@ -71,10 +72,20 @@ export default function Login(): React.JSX.Element {
               </FormGroup>
               <Button
                 onClick={() => handleLogin()}
-                className="btn-egypt-blue d-block w-100 body-14-bold"
+                className="btn-egypt-blue d-block w-100 body-14-bold mb-3"
               >
                 Sign In
               </Button>
+              <div className="d-flex justify-content-center">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    console.log(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+              </div>
             </Form>
           </div>
         </Col>
