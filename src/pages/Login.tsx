@@ -8,17 +8,23 @@ import {
   Row,
 } from "react-bootstrap";
 import TextView from "../components/Text/TextView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import instance from "../api/axios";
 import { useAuth } from "../hooks/useAuth";
 import { GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
 export default function Login(): React.JSX.Element {
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/admin-dashboard");
+    }
+  }, [isAuthenticated]);
   async function handleLogin() {
     try {
       const result = await instance.post(`/login`, { email, password });

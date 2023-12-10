@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { IUser } from "../interfaces";
 import { useNavigate } from "react-router-dom";
+import instance from "../api/axios";
 
 export const useAuth = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -17,8 +18,6 @@ export const useAuth = () => {
       const decode = jwtDecode(token) as IJwtPayload;
 
       if (decode.exp && decode.exp * 1000 < Date.now()) {
-        console.log("sini");
-
         logout();
       } else {
         setIsAuthenticated(true);
@@ -36,20 +35,16 @@ export const useAuth = () => {
   };
 
   const verifyToken = (token: string) => {
-    const baseUrl = import.meta.env["VITE_BACKEND_URL"];
-    axios
-      .get(`${baseUrl}/protected`, {
+    instance
+      .get(`/protected`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then(() => {
         const decode = jwtDecode(token) as IJwtPayload;
-        console.log(decode.exp);
 
         if (decode.exp * 1000 < Date.now()) {
-          console.log("token exp");
-
           logout();
           return;
         }

@@ -36,11 +36,13 @@ export default function AdminLayout() {
             />
           </Col>
           <Col xs="auto">
-            <DropdownButton title={user?.username} align="end">
-              <Dropdown.Item eventKey="1" onClick={() => handleLogout()}>
-                Logout
-              </Dropdown.Item>
-            </DropdownButton>
+            {user && (
+              <DropdownButton title={user.username} align="end">
+                <Dropdown.Item eventKey="1" onClick={() => handleLogout()}>
+                  Logout
+                </Dropdown.Item>
+              </DropdownButton>
+            )}
           </Col>
         </Row>
       </Navbar>

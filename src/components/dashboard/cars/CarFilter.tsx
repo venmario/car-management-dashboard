@@ -1,16 +1,13 @@
 import { Alert, Button, Col, Container, Image, Row } from "react-bootstrap";
 import FormFilter from "./FormFilter";
-import axios from "axios";
 import { useState } from "react";
 import CarCard from "./CarCard";
-import { Car } from "../../../interfaces";
+import { Car, EventTargetForm } from "../../../interfaces";
 import icalendar from "../../../assets/icons/fi_calendar.svg";
 import iusers from "../../../assets/icons/fi_users.svg";
 import iVector from "../../../assets/icons/Vector.svg";
-interface EventTargetForm {
-  elements: Record<string, { value: string | number }>;
-}
-const baseUrl = import.meta.env["VITE_BACKEND_URL"];
+import instance from "../../../api/axios";
+
 export default function CarFilter() {
   // state
   const [cars, setCars] = useState<Array<Car> | undefined>();
@@ -27,7 +24,7 @@ export default function CarFilter() {
     const qString = `driver=${driver}&tanggal=${tanggal}&waktu=${waktu}&jumlah=${jumlah}`;
 
     try {
-      const res = await axios.get(`${baseUrl}/cars?${qString}`);
+      const res = await instance.get(`/cars?${qString}`);
       setCars(res.data);
       setError(undefined);
     } catch (err) {

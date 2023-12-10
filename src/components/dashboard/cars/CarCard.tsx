@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
+import { IClassName } from "../../../interfaces";
 
-interface CarCardProps {
+interface CarCardProps extends IClassName {
   children: ReactNode;
 }
 const CarCard = ({ children }: CarCardProps) => (
@@ -20,8 +21,8 @@ CarCard.ListItem = ({ children }: CarCardProps) => (
 CarCard.ListItem = ({ children }: CarCardProps) => (
   <div className="list-group-item border-0 px-0">{children}</div>
 );
-CarCard.CardFooter = ({ children }: CarCardProps) => (
-  <div className="pt-2 pb-0">{children}</div>
+CarCard.CardFooter = ({ children, className }: CarCardProps) => (
+  <div className={`pt-2 pb-0 ${className}`}>{children}</div>
 );
 
 export default CarCard;

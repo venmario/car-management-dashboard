@@ -1,45 +1,26 @@
-import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Breadcrumb, Button, Col, Image, Row } from "react-bootstrap";
-import { Plus } from "react-feather";
-import { Car } from "../../interfaces";
+import { Edit, Plus, Trash } from "react-feather";
+import { Car, CarContextType } from "../../interfaces";
 import CarCard from "../dashboard/cars/CarCard";
 import icalendar from "../../assets/icons/fi_calendar.svg";
 import iusers from "../../assets/icons/fi_users.svg";
 import iVector from "../../assets/icons/Vector.svg";
-import instance from "../../api/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { CarContext } from "../../context/carContext";
 
 export default function CarContent() {
-  const token = localStorage.getItem("token");
   const [filter, setFilter] = useState<string>("all");
-  const [cars, setCars] = useState<Car[]>([]);
+  const { cars } = useContext(CarContext) as CarContextType;
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
+  const navigate = useNavigate();
   useAuth();
   useEffect(() => {
-    console.log("user effect awal");
-
-    const fetchCars = async () => {
-      const result = await instance.get(`/api/cars`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setCars(result.data);
-      setFilteredCars(result.data);
-    };
-
-    fetchCars().catch((err) => {
-      if (err instanceof AxiosError) {
-        console.log(err);
-      }
-    });
-  }, []);
+    setFilteredCars(cars);
+  }, [cars]);
 
   useEffect(() => {
-    console.log("use effect filter");
-
     const newCars = cars.filter((car) => {
       if (filter === "large") {
         return car.capacity == 6;
@@ -63,7 +44,7 @@ export default function CarContent() {
           ListCars
         </Breadcrumb.Item>
       </Breadcrumb>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between align-items-center mb-3">
         <h3 className="heading-20-bold">List Cars</h3>
         <Link
           to="/admin-dashboard/cars/create"
@@ -118,7 +99,7 @@ export default function CarContent() {
           filteredCars.map((car) => (
             <Col key={car.id} md={6} lg={4} className="mb-3">
               <CarCard>
-                <Image src={car.image} />
+                <Image src={car.image} className="card-img-top card-img-car" />
                 <CarCard.Body>
                   <h5 className="body-14-reguler">
                     {car.manufacture} {car.model}/{car.type}
@@ -142,13 +123,24 @@ export default function CarContent() {
                     {car.year}
                   </CarCard.ListItem>
                 </CarCard.List>
-                <CarCard.CardFooter>
+                <CarCard.CardFooter className="d-flex gap-3">
+                  <Button
+                    variant="outline-danger"
+                    className="body-14-bold flex-grow-1"
+                  >
+                    <Trash />
+                    Delete
+                  </Button>
+
                   <Button
                     variant="success"
-                    size="lg"
-                    className="d-block w-100 body-14-bold"
+                    className="body-14-bold flex-grow-1"
+                    onClick={() =>
+                      navigate(`/admin-dashboard/cars/${car.id}/edit`)
+                    }
                   >
-                    Pilih Mobil
+                    <Edit />
+                    Edit
                   </Button>
                 </CarCard.CardFooter>
               </CarCard>
