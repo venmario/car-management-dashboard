@@ -44,7 +44,10 @@ export default function CarFilter() {
               cars.map((car) => (
                 <Col key={car.id} md={6} lg={4} className="mb-3">
                   <CarCard>
-                    <Image src={car.image} />
+                    <Image
+                      src={car.image}
+                      className="card-img-top card-img-car"
+                    />
                     <CarCard.Body>
                       <h5 className="body-14-reguler">
                         {car.manufacture} {car.model}/{car.type}
