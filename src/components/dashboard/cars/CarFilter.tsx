@@ -24,6 +24,8 @@ export default function CarFilter() {
     const qString = `driver=${driver}&tanggal=${tanggal}&waktu=${waktu}&jumlah=${jumlah}`;
 
     try {
+      console.log(import.meta.env["VITE_BACKEND_URL"]);
+
       const res = await instance.get(`/cars?${qString}`);
       setCars(res.data);
       setError(undefined);
