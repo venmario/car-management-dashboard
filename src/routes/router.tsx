@@ -12,7 +12,7 @@ import PrivateRoutes from "../utils/privateRoutes";
 import AddCar from "../components/admindashboard/AddCar";
 import EditCar from "../components/admindashboard/EditCar";
 
-const router = Router([
+export const routerConfig = [
   {
     path: "/",
     element: <Layout />,
@@ -20,17 +20,17 @@ const router = Router([
     children: [
       {
         path: "/",
-        element: <LandingPage />,
+        element: <LandingPage />
       },
       {
         path: "/cars",
-        element: <Cars />,
-      },
-    ],
+        element: <Cars />
+      }
+    ]
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <Login />
   },
   {
     element: <PrivateRoutes />,
@@ -41,7 +41,7 @@ const router = Router([
         children: [
           {
             path: "/admin-dashboard",
-            element: <SidebarDashboard />,
+            element: <SidebarDashboard />
           },
           {
             path: "/admin-dashboard/cars",
@@ -49,22 +49,23 @@ const router = Router([
             children: [
               {
                 path: "/admin-dashboard/cars",
-                element: <CarContent />,
+                element: <CarContent />
               },
               {
                 path: "/admin-dashboard/cars/create",
-                element: <AddCar />,
+                element: <AddCar />
               },
               {
                 path: "/admin-dashboard/cars/:id/edit",
-                element: <EditCar />,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-]);
+                element: <EditCar />
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+const router = Router(routerConfig);
 
 export default router;

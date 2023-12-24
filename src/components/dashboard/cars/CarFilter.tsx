@@ -35,7 +35,7 @@ export default function CarFilter() {
     }
   };
   return (
-    <section id="filter-car">
+    <section id="filter-car" data-testid="filter-car">
       <Container fluid="lg" className="pt-3 pt-lg-0 px-lg-5">
         <div className="filter">
           <FormFilter handleSubmit={handleSubmit} />

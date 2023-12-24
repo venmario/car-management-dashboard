@@ -6,7 +6,7 @@ import {
   FormControl,
   FormLabel,
   FormSelect,
-  Row,
+  Row
 } from "react-bootstrap";
 import iuser from "../../../assets/icons/icon_user.svg";
 
@@ -46,6 +46,7 @@ export default function FormFilter({ handleSubmit }: FormFilterProps) {
                 <FormSelect
                   required
                   name="driver"
+                  data-testid="driver"
                   id="driver"
                   className="body-12-light"
                   onChange={(e) => handleDriver(e.target.value)}
