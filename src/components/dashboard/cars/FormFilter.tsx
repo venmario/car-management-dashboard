@@ -67,6 +67,7 @@ export default function FormFilter({ handleSubmit }: FormFilterProps) {
                   type="date"
                   name="tanggal"
                   id="tanggal"
+                  data-testid="tanggal"
                   className="body-12-light"
                   required
                   value={date}
@@ -80,6 +81,7 @@ export default function FormFilter({ handleSubmit }: FormFilterProps) {
                 <FormSelect
                   className="body-12-light"
                   id="waktu"
+                  data-testid="waktu"
                   name="waktu"
                   required
                   value={time}
@@ -108,6 +110,7 @@ export default function FormFilter({ handleSubmit }: FormFilterProps) {
                     placeholder="Jumlah Penumpang"
                     type="input"
                     name="jumlah"
+                    data-testid="jumlah"
                     className="body-12-light position-relative"
                     onChange={(e) => handleCapacity(e.target.value)}
                     value={capacity}
