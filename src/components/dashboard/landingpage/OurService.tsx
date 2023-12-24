@@ -5,14 +5,14 @@ import {
   Image,
   ListGroup,
   ListGroupItem,
-  Row,
+  Row
 } from "react-bootstrap";
 
 import iCheck from "../../../assets/icons/checklist.svg";
 
 export default function OurService(): React.JSX.Element {
   return (
-    <section id="ourservice">
+    <section id="ourservice" data-testid="ourservice">
       <Container className="our-section py-5">
         <Row>
           <Col md={6}>

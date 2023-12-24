@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function CtaBanner() {
   return (
-    <section className="cta-banner-section py-5 px-3 px-md-0">
+    <section
+      data-testid="ctabanner"
+      className="cta-banner-section py-5 px-3 px-md-0"
+    >
       <Container className="cta-banner py-5">
         <h1 className="text-center text-white mb-4 heading-24-bold hero-title">
           Sewa Mobil di Surabaya Sekarang

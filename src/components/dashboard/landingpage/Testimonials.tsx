@@ -7,7 +7,11 @@ import "swiper/css/navigation";
 import SwiperNav from "./SwiperNav";
 export default function Testimonials(): React.JSX.Element {
   return (
-    <section id="testimonials" className="testimonial-section">
+    <section
+      id="testimonials"
+      data-testid="testimonials"
+      className="testimonial-section"
+    >
       <h1 className="text-center heading-24-bold">Testimonial</h1>
       <p className="text-center body-14-light">
         Berbagai review positif dari para pelanggan kami
@@ -19,8 +23,8 @@ export default function Testimonials(): React.JSX.Element {
         breakpoints={{
           768: {
             slidesPerView: 2,
-            centeredSlides: true,
-          },
+            centeredSlides: true
+          }
         }}
         className="mySwiper px-3"
       >

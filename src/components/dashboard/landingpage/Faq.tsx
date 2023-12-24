@@ -2,7 +2,7 @@ import { Accordion, Col, Container, Row } from "react-bootstrap";
 
 export default function Faq(): React.JSX.Element {
   return (
-    <section id="faq">
+    <section id="faq" data-testid="faq">
       <Container className="faq-section p-0 pb-5 px-3 px-md-0">
         <Row>
           <Col md={4}>

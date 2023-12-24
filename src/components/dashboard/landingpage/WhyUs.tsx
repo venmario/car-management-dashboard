@@ -6,7 +6,7 @@ import iprice from "../../../assets/icons/icon_price.svg";
 
 export default function WhyUs(): React.JSX.Element {
   return (
-    <section id="whyus">
+    <section id="whyus" data-testid="whyus">
       <Container className="why-us-section pb-5">
         <h2 className="text-center text-md-start heading-24-bold">Why Us?</h2>
         <p className="text-center text-md-start">

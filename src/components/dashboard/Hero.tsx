@@ -7,7 +7,7 @@ interface HeroProps {
 
 export default function Hero({ path = "/" }: HeroProps): React.JSX.Element {
   return (
-    <section id="hero" className="hero hero-aliceblue">
+    <section id="hero" data-testid="hero" className="hero hero-aliceblue">
       <Row className="h-100 w-100 ms-0">
         <Col lg={6}>
           <div className="hero__left pt-lg-5 ms-sm-auto">
