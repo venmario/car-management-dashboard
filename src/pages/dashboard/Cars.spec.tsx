@@ -60,4 +60,6 @@ describe("Cars Page", () => {
     const buttonCariMobil = screen.getByRole("button", { name: "Cari Mobil" });
     expect(buttonCariMobil).toHaveAttribute("disabled", "");
   });
+
+  it("should display 9 cards of car", async () => {});
 });

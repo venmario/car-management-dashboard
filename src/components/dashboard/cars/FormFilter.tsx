@@ -34,6 +34,7 @@ export default function FormFilter({ handleSubmit }: FormFilterProps) {
 
   return (
     <Form
+      data-testid="formfilter"
       onSubmit={(e) => handleSubmit(e)}
       className="form-cari rounded form-cari-shadow p-3 mb-3"
     >
