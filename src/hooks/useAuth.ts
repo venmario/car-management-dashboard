@@ -23,7 +23,7 @@ export const useAuth = () => {
         setIsAuthenticated(true);
         const authUser: IUser = {
           username: decode.username,
-          email: decode.email,
+          email: decode.email
         };
         setUser(authUser);
       }
@@ -38,13 +38,15 @@ export const useAuth = () => {
     instance
       .get(`/protected`, {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       })
       .then(() => {
         const decode = jwtDecode(token) as IJwtPayload;
 
         if (decode.exp * 1000 < Date.now()) {
+          console.log(decode.exp);
+
           logout();
           return;
         }
@@ -52,7 +54,7 @@ export const useAuth = () => {
         setIsAuthenticated(true);
         const authUser: IUser = {
           username: decode.username,
-          email: decode.email,
+          email: decode.email
         };
         setUser(authUser);
         navigate("/admin-dashboard");

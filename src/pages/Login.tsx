@@ -5,7 +5,7 @@ import {
   FormControl,
   FormGroup,
   Image,
-  Row,
+  Row
 } from "react-bootstrap";
 import TextView from "../components/Text/TextView";
 import { useEffect, useState } from "react";
@@ -28,7 +28,9 @@ export default function Login(): React.JSX.Element {
   async function handleLogin() {
     try {
       const result = await instance.post(`/login`, { email, password });
+
       const token = result.data.token;
+
       login(token);
     } catch (err) {
       if (err instanceof AxiosError) {
