@@ -28,6 +28,7 @@ export default function Login(): React.JSX.Element {
   async function handleLogin() {
     try {
       const result = await instance.post(`/login`, { email, password });
+      console.log(result);
 
       const token = result.data.token;
 

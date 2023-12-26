@@ -13,13 +13,14 @@ export default function SidebarCars() {
   const token = localStorage.getItem("token");
   const [cars, setCars] = useState<Car[]>([]);
   const headers = {
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`
   };
   useEffect(() => {
     const fetchCars = async () => {
       const result = await instance.get(`/api/cars`, {
-        headers,
+        headers
       });
+
       setCars(result.data);
     };
 
@@ -39,10 +40,10 @@ export default function SidebarCars() {
         capacity: car.capacity,
         image: car.image,
         transmission: car.transmission,
-        year: car.year,
+        year: car.year
       };
       const result = await instance.post("/api/cars", data, {
-        headers,
+        headers
       });
       if (result.status == 200) {
         const newCar: Car = { ...data, id: result.data.id };
@@ -54,7 +55,7 @@ export default function SidebarCars() {
         if (err.response?.status == 500) {
           return {
             type: "error",
-            message: "Gambar mobil belum dipilih!",
+            message: "Gambar mobil belum dipilih!"
           };
         } else {
           return { type: "error", message: err.response?.data };
@@ -77,10 +78,10 @@ export default function SidebarCars() {
         capacity: car.capacity,
         image: car.image,
         transmission: car.transmission,
-        year: car.year,
+        year: car.year
       };
       const result = await instance.patch(`/api/cars/${car.id}`, data, {
-        headers,
+        headers
       });
 
       if (result.status == 200) {
@@ -90,7 +91,7 @@ export default function SidebarCars() {
           if (car.id === idCar) {
             return {
               ...car,
-              ...updatedCar,
+              ...updatedCar
             };
           } else {
             return car;

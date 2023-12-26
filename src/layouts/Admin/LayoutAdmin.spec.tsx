@@ -13,25 +13,25 @@ import { routerConfig } from "../../routes/router";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { setupServer } from "msw/node";
-import { HttpResponse, http } from "msw";
+import {
+  getCars,
+  login,
+  protectedRest,
+  responseLogin
+} from "./responseMock/respMock";
 
-vi.mock("jwt-decode", () => ({ jwtDecode: () => ({ exp: 9999999999 }) }));
-const response = {
-  token:
-    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzAzNDgzNDg1LCJleHAiOjE3MDM0ODUyODV9.Xs5xKgIltKrmfN_yn49vVSOr6yauI3GiyO8e5qgeQnq5hcnKvwXyJOtTo0TLcM8zPNj2suJ8_97XHHaVFTwIiZABoNLZfXrlCsFXBBpFLUY9cQIkWpPRNbc5krtaW_je_stOi9a8NAUgFLIiHwJg2ajPqk8TbtQKC2tmU5bmzrfuyje395RYnwZMg8Bvg7bCUtr8JC0kSk4_51e88c654TNz-dQlR0usc6mOg3adICozhN8Rn3YOiCExXz9bjcDNw0Gxzh5eejN8K65UmofmOQonGPl4fqw7g3s2hQMmcCdS5tN2EcUcBPf01XF7HAJcIFEovyTv40EJEYWVMyMtGJwbWgWCNGOHean71WPcX-Zkih5RVMo2u8qRrgTbv2-nePGgDDW4nixVJiJeJdTk4AV4Zgd8l-4AwRtu2BSVPHaaPnHsm2WIKB7OJS7c6EhuBQYJAIi9aYQSrU6PmDLdh9v_6xAlRpQGRPMFQ_A7odBUyAOS5VDfaU7OZZJob-ZFQOC3lqta4PJ7_1v3pyfIhILd3dgeMmljIQvXiimYNwMZHDxe_K3PpVcf9966kQF0dAo-F8-IAibkaGNVcysZFR14uu6b0-nuwD2er8mQJb-kqbfUiLZA8fmFylYZWohz-5ygTJ0VlPsYWuaEKXarPD7JjkECSqXBqTPTiZdOgS0"
-};
-
-export const restHandler = [
-  http.post("https://bcr-restapi-mario.fly.dev/login", () => {
-    return HttpResponse.json(response);
-  }),
-  http.get("https://bcr-restapi-mario.fly.dev/protected", () => {
-    return HttpResponse.json({
-      message: "token valid",
-      status: 200
-    });
+vi.mock("jwt-decode", () => ({
+  jwtDecode: () => ({
+    "id": 1,
+    "username": "superadmin",
+    "email": "superadmin@gmail.com",
+    "role": "superadmin",
+    "iat": 1703483485,
+    "exp": 9999999999
   })
-];
+}));
+
+export const restHandler = [login, protectedRest, getCars];
 
 const server = setupServer(...restHandler);
 
@@ -56,7 +56,12 @@ describe("Layout Admin Test", () => {
       </GoogleOAuthProvider>
     );
   };
+  it("should render login page because unauthenticated", () => {
+    renderWithRoute("/admin-dashboard");
 
+    const el: HTMLImageElement = screen.getByAltText("login");
+    expect(el.src).toContain("login-Admin");
+  });
   it("should login before access admin dashboard", async () => {
     renderWithRoute("/login");
 
@@ -70,14 +75,33 @@ describe("Layout Admin Test", () => {
     const btnLogin = screen.getByRole("button", { name: "Sign In" });
     fireEvent.click(btnLogin);
 
-    screen.debug();
-    // expect(localStorage.getItem("token")).toBe(true);
+    localStorage.setItem("token", responseLogin.token);
+    expect(localStorage.getItem("token")).toBeDefined();
+    expect(
+      await screen.findByRole("button", { name: "superadmin" })
+    ).toBeVisible();
   });
 
-  it("should render login page because unauthenticated", () => {
-    renderWithRoute("/admin-dashboard");
+  it("should render list of cars in admin dashboard", async () => {
+    renderWithRoute("/admin-dashboard/cars");
 
-    const el: HTMLImageElement = screen.getByAltText("login");
-    expect(el.src).toContain("login-Admin");
+    expect(localStorage.getItem("token")).toBeDefined();
+    expect(
+      await screen.findByRole("button", { name: "superadmin" })
+    ).toBeVisible();
+
+    const buttonAll = screen.getByRole("button", { name: "All" });
+    expect(buttonAll).toBeVisible();
+
+    const buttonSmall = screen.getByRole("button", { name: "Small" });
+    expect(buttonSmall).toBeVisible();
+
+    const buttonMedium = screen.getByRole("button", { name: "Medium" });
+    expect(buttonMedium).toBeVisible();
+
+    const buttonLarge = screen.getByRole("button", { name: "Large" });
+    expect(buttonLarge).toBeVisible();
+
+    screen.debug();
   });
 });

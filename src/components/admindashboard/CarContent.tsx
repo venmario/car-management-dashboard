@@ -13,6 +13,7 @@ import { CarContext } from "../../context/carContext";
 export default function CarContent() {
   const [filter, setFilter] = useState<string>("all");
   const { cars } = useContext(CarContext) as CarContextType;
+
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
   const navigate = useNavigate();
   useAuth();
