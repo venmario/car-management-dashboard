@@ -42,7 +42,13 @@ export default function CarFilter() {
           <Row id="filtered-car">
             {cars &&
               cars.map((car) => (
-                <Col key={car.id} md={6} lg={4} className="mb-3">
+                <Col
+                  key={car.id}
+                  md={6}
+                  lg={4}
+                  className="mb-3"
+                  data-testid="card"
+                >
                   <CarCard>
                     <Image
                       src={car.image}

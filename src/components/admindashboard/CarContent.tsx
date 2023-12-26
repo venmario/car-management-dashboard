@@ -23,11 +23,11 @@ export default function CarContent() {
 
   useEffect(() => {
     const newCars = cars.filter((car) => {
-      if (filter === "large") {
+      if (filter == "large") {
         return car.capacity == 6;
-      } else if (filter === "medium") {
+      } else if (filter == "medium") {
         return car.capacity > 3 && car.capacity < 6;
-      } else if (filter === "small") {
+      } else if (filter == "small") {
         return car.capacity < 4;
       } else {
         return true;
@@ -35,6 +35,7 @@ export default function CarContent() {
     });
     setFilteredCars(newCars);
   }, [filter]);
+
   return (
     <>
       <Breadcrumb>
@@ -50,6 +51,7 @@ export default function CarContent() {
         <Link
           to="/admin-dashboard/cars/create"
           className="btn btn-egypt-blue body-14-bold text-white"
+          data-testid="AddCar"
         >
           <Plus />
           Add New Car
@@ -97,8 +99,8 @@ export default function CarContent() {
 
       <Row>
         {filteredCars &&
-          filteredCars.map((car) => (
-            <Col key={car.id} md={6} lg={4} className="mb-3">
+          filteredCars.map((car, index) => (
+            <Col key={car.id} md={6} lg={4} className="mb-3" data-testid="card">
               <CarCard>
                 <Image src={car.image} className="card-img-top card-img-car" />
                 <CarCard.Body>
@@ -140,7 +142,7 @@ export default function CarContent() {
                       navigate(`/admin-dashboard/cars/${car.id}/edit`)
                     }
                   >
-                    <Edit />
+                    <Edit data-testid={`card-${index}`} />
                     Edit
                   </Button>
                 </CarCard.CardFooter>

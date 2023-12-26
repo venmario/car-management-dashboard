@@ -1,8 +1,19 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { BrowserRouter } from "react-router-dom";
 import Cars from "./Cars";
+import { filterCar } from "../../layouts/Admin/responseMock/respMock";
+import { setupServer } from "msw/node";
 
+export const restHandler = [filterCar];
+
+const server = setupServer(...restHandler);
+
+beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
+
+afterAll(() => {
+  server.close();
+});
 describe("Cars Page", () => {
   function renderCarsComp() {
     render(<Cars />, { wrapper: BrowserRouter });
@@ -61,5 +72,25 @@ describe("Cars Page", () => {
     expect(buttonCariMobil).toHaveAttribute("disabled", "");
   });
 
-  it("should display 9 cards of car", async () => {});
+  it("should display 3 cards of car", async () => {
+    renderCarsComp();
+
+    const driverOptions: HTMLInputElement = screen.getByTestId("driver");
+    fireEvent.change(driverOptions, { target: { value: "true" } });
+
+    const inputTanggal: HTMLInputElement = screen.getByTestId("tanggal");
+    fireEvent.change(inputTanggal, { target: { value: "2023-12-31" } });
+
+    const inputWaktu: HTMLInputElement = screen.getByTestId("waktu");
+    fireEvent.change(inputWaktu, { target: { value: "10" } });
+
+    const inputJumlah: HTMLInputElement = screen.getByTestId("jumlah");
+    fireEvent.change(inputJumlah, { target: { value: "2" } });
+
+    const buttonCariMobil = screen.getByRole("button", { name: "Cari Mobil" });
+
+    fireEvent.click(buttonCariMobil);
+
+    expect((await screen.findAllByTestId("card")).length).toBe(3);
+  });
 });

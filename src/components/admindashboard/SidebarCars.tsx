@@ -45,6 +45,7 @@ export default function SidebarCars() {
       const result = await instance.post("/api/cars", data, {
         headers
       });
+
       if (result.status == 200) {
         const newCar: Car = { ...data, id: result.data.id };
         setCars([...cars, newCar]);

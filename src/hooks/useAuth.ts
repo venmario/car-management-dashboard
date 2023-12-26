@@ -45,8 +45,6 @@ export const useAuth = () => {
         const decode = jwtDecode(token) as IJwtPayload;
 
         if (decode.exp * 1000 < Date.now()) {
-          console.log(decode.exp);
-
           logout();
           return;
         }

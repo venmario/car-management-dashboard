@@ -8,7 +8,7 @@ import {
   FormLabel,
   FormSelect,
   Image,
-  Row,
+  Row
 } from "react-bootstrap";
 import { Car, Tfeedback } from "../../interfaces";
 import { useState, useEffect } from "react";
@@ -114,6 +114,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 className="body-12-light"
                 type="text"
                 name="manufacture"
+                data-testid="manufacture"
                 value={manufacture}
                 onChange={(e) => setManufacture(e.target.value)}
               />
@@ -129,6 +130,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 type="text"
                 value={model}
                 name="model"
+                data-testid="model"
                 onChange={(e) => setModel(e.target.value)}
               />
             </Col>
@@ -143,6 +145,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 type="text"
                 value={type}
                 name="type"
+                data-testid="type"
                 onChange={(e) => setType(e.target.value)}
               />
             </Col>
@@ -157,6 +160,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 type="text"
                 value={year}
                 name="year"
+                data-testid="year"
                 onChange={(e) => handleInputYear(e.target.value)}
               />
             </Col>
@@ -171,6 +175,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 type="text"
                 value={rentPerDay}
                 name="rentPerDay"
+                data-testid="rentPerDay"
                 onChange={(e) => handleInputrentPerDay(e.target.value)}
               />
             </Col>
@@ -197,6 +202,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 type="number"
                 value={capacity}
                 name="capacity"
+                data-testid="capacity"
                 min={2}
                 max={6}
                 onChange={(e) => setCapacity(Number(e.target.value))}
@@ -212,6 +218,7 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
                 className="body-12-light"
                 value={transmission}
                 name="transmission"
+                data-testid="transmission"
                 onChange={(e) => setTransmission(e.target.value)}
               >
                 <option value="Manual">Manual</option>
@@ -229,7 +236,12 @@ export default function FormCar({ car, handleSubmit, feedback }: FormCarProps) {
               className="card-img-top card-img-car"
             />
           )}
-          <FormControl type="hidden" name="image" value={imageUrl} />
+          <FormControl
+            type="hidden"
+            data-testid="image"
+            name="image"
+            value={imageUrl}
+          />
         </Col>
         <div className="d-flex gap-3">
           <Button

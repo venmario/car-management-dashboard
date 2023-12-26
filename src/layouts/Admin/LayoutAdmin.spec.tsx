@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import {
   afterAll,
   afterEach,
@@ -14,10 +14,12 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { setupServer } from "msw/node";
 import {
+  createCar,
   getCars,
   login,
   protectedRest,
-  responseLogin
+  responseLogin,
+  updateCar
 } from "./responseMock/respMock";
 
 vi.mock("jwt-decode", () => ({
@@ -31,7 +33,13 @@ vi.mock("jwt-decode", () => ({
   })
 }));
 
-export const restHandler = [login, protectedRest, getCars];
+export const restHandler = [
+  login,
+  protectedRest,
+  getCars,
+  createCar,
+  updateCar
+];
 
 const server = setupServer(...restHandler);
 
@@ -102,6 +110,117 @@ describe("Layout Admin Test", () => {
     const buttonLarge = screen.getByRole("button", { name: "Large" });
     expect(buttonLarge).toBeVisible();
 
-    screen.debug();
+    expect((await screen.findAllByTestId("card")).length).toBe(3);
+  });
+
+  it("should render form edit car", async () => {
+    renderWithRoute("/admin-dashboard/cars");
+
+    const buttonEdit = await screen.findByTestId("card-0");
+    fireEvent.click(buttonEdit);
+
+    expect(screen.getByRole("heading", { name: "Edit Car" })).toBeVisible();
+
+    const image = screen.getByTestId("image");
+    fireEvent.change(image, {
+      target: {
+        value:
+          "https://res.cloudinary.com/dwy823csd/image/upload/v1703613900/avkwc15fz9fledfgikri.jpg"
+      }
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    expect(screen.getByText(/loading/i)).toBeVisible();
+
+    expect(await screen.findByText(/berhasil/i)).toBeVisible();
+  });
+
+  it("should filter car by capacity", () => {
+    renderWithRoute("/admin-dashboard/cars");
+
+    const buttonAll = screen.getByRole("button", { name: "All" });
+    fireEvent.click(buttonAll);
+    expect(buttonAll).toHaveClass("btn-egypt-blue");
+
+    const buttonSmall = screen.getByRole("button", { name: "Small" });
+    fireEvent.click(buttonSmall);
+    expect(buttonSmall).toHaveClass("btn-egypt-blue");
+
+    const buttonMedium = screen.getByRole("button", { name: "Medium" });
+    fireEvent.click(buttonMedium);
+    expect(buttonMedium).toHaveClass("btn-egypt-blue");
+
+    const buttonLarge = screen.getByRole("button", { name: "Large" });
+    fireEvent.click(buttonLarge);
+    expect(buttonLarge).toHaveClass("btn-egypt-blue");
+  });
+
+  it("should render form create car", async () => {
+    renderWithRoute("/admin-dashboard/cars");
+
+    expect(localStorage.getItem("token")).toBeDefined();
+    expect(
+      await screen.findByRole("button", { name: "superadmin" })
+    ).toBeVisible();
+
+    const buttonAddCar = screen.getByTestId("AddCar");
+    fireEvent.click(buttonAddCar);
+
+    expect(screen.getByRole("heading", { name: "Add New Car" })).toBeVisible();
+  });
+
+  it("should render create a new car", () => {
+    renderWithRoute("/admin-dashboard/cars");
+
+    const buttonAddCar = screen.getByTestId("AddCar");
+    fireEvent.click(buttonAddCar);
+
+    const manufacture = screen.getByTestId("manufacture");
+    fireEvent.change(manufacture, { target: { value: "Audi" } });
+
+    const model = screen.getByTestId("model");
+    fireEvent.change(model, { target: { value: "S5" } });
+
+    const type = screen.getByTestId("type");
+    fireEvent.change(type, { target: { value: "Coupe" } });
+
+    const year = screen.getByTestId("year");
+    fireEvent.change(year, { target: { value: 2020 } });
+
+    const rentPerDay = screen.getByTestId("rentPerDay");
+    fireEvent.change(rentPerDay, { target: { value: 300000 } });
+
+    const capacity = screen.getByTestId("capacity");
+    fireEvent.change(capacity, { target: { value: 6 } });
+
+    const transmission = screen.getByTestId("transmission");
+    fireEvent.change(transmission, { target: { value: "Automatic" } });
+
+    const image = screen.getByTestId("image");
+    fireEvent.change(image, {
+      target: {
+        value:
+          "https://res.cloudinary.com/dwy823csd/image/upload/v1702571317/haeazowck57ksokpapaj.jpg"
+      }
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    expect(screen.getByText(/loading/i)).toBeVisible();
+
+    waitFor(() => expect(screen.findByText(/berhasil/i)).toBeVisible());
+  });
+
+  it("should logout from admin dashboard", async () => {
+    renderWithRoute("/admin-dashboard");
+    const buttonUser = await screen.findByRole("button", {
+      name: "superadmin"
+    });
+    fireEvent.click(buttonUser);
+
+    const buttonLogout = screen.getByRole("button", { name: "Logout" });
+    expect(buttonLogout).toBeVisible();
+
+    fireEvent.click(buttonLogout);
+    expect(localStorage.getItem("token")).toBeNull();
   });
 });

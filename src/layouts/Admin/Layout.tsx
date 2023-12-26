@@ -4,7 +4,7 @@ import {
   DropdownButton,
   FormControl,
   Navbar,
-  Row,
+  Row
 } from "react-bootstrap";
 import { Home, Truck } from "react-feather";
 import { NavLink, Outlet } from "react-router-dom";
@@ -15,7 +15,6 @@ export default function AdminLayout() {
 
   const handleLogout = () => {
     logout();
-    console.log("logged out");
   };
   return (
     <header className="position-relative admin-header overflow-hidden">

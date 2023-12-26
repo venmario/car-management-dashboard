@@ -132,6 +132,13 @@ export const responseLogin = {
     "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJzdXBlcmFkbWluIiwiZW1haWwiOiJzdXBlcmFkbWluQGdtYWlsLmNvbSIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzAzNDgzNDg1LCJleHAiOjE3MDM0ODUyODV9.Xs5xKgIltKrmfN_yn49vVSOr6yauI3GiyO8e5qgeQnq5hcnKvwXyJOtTo0TLcM8zPNj2suJ8_97XHHaVFTwIiZABoNLZfXrlCsFXBBpFLUY9cQIkWpPRNbc5krtaW_je_stOi9a8NAUgFLIiHwJg2ajPqk8TbtQKC2tmU5bmzrfuyje395RYnwZMg8Bvg7bCUtr8JC0kSk4_51e88c654TNz-dQlR0usc6mOg3adICozhN8Rn3YOiCExXz9bjcDNw0Gxzh5eejN8K65UmofmOQonGPl4fqw7g3s2hQMmcCdS5tN2EcUcBPf01XF7HAJcIFEovyTv40EJEYWVMyMtGJwbWgWCNGOHean71WPcX-Zkih5RVMo2u8qRrgTbv2-nePGgDDW4nixVJiJeJdTk4AV4Zgd8l-4AwRtu2BSVPHaaPnHsm2WIKB7OJS7c6EhuBQYJAIi9aYQSrU6PmDLdh9v_6xAlRpQGRPMFQ_A7odBUyAOS5VDfaU7OZZJob-ZFQOC3lqta4PJ7_1v3pyfIhILd3dgeMmljIQvXiimYNwMZHDxe_K3PpVcf9966kQF0dAo-F8-IAibkaGNVcysZFR14uu6b0-nuwD2er8mQJb-kqbfUiLZA8fmFylYZWohz-5ygTJ0VlPsYWuaEKXarPD7JjkECSqXBqTPTiZdOgS0"
 };
 
+export const filterCar = http.get(
+  "https://bcr-restapi-mario.fly.dev/cars",
+  (): HttpResponse => {
+    return HttpResponse.json(getCarsResponse);
+  }
+);
+
 export const login = http.post(
   "https://bcr-restapi-mario.fly.dev/login",
   (): HttpResponse => {
@@ -146,5 +153,29 @@ export const protectedRest = http.get(
       message: "token valid",
       status: 200
     });
+  }
+);
+
+export const createCar = http.post(
+  "https://bcr-restapi-mario.fly.dev/api/cars",
+  (): HttpResponse => {
+    return HttpResponse.json(
+      { id: "fc1d3297-ab17-40a9-a79c-ca7307ed5faa" },
+      { status: 200 }
+    );
+  }
+);
+
+export const updateCar = http.patch(
+  "https://bcr-restapi-mario.fly.dev/api/cars/5b67f1d7-92d4-41c7-8577-4435740aadf1",
+  (): HttpResponse => {
+    return HttpResponse.json(
+      {
+        ...getCarsResponse[0],
+        image:
+          "https://res.cloudinary.com/dwy823csd/image/upload/v1703613900/avkwc15fz9fledfgikri.jpg"
+      },
+      { status: 200 }
+    );
   }
 );

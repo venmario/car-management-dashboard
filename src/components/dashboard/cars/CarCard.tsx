@@ -18,9 +18,6 @@ CarCard.List = ({ children }: CarCardProps) => (
 CarCard.ListItem = ({ children }: CarCardProps) => (
   <div className="list-group-item border-0 px-0">{children}</div>
 );
-CarCard.ListItem = ({ children }: CarCardProps) => (
-  <div className="list-group-item border-0 px-0">{children}</div>
-);
 CarCard.CardFooter = ({ children, className }: CarCardProps) => (
   <div className={`pt-2 pb-0 ${className}`}>{children}</div>
 );
